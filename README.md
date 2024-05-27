@@ -3,7 +3,7 @@
 
 ## Overview
 
-This repository contains the implementation of a trapezoidal map algorithm for efficient line segment intersection queries. The algorithm constructs a search structure to manage and query line segments within a bounded region, supporting various geometric operations.
+This repository contains the implementation of a trapezoidal map algorithm for efficient planar point loacation queries. The algorithm constructs a search structure to manage and query line segments within a bounded region, supporting various geometric operations. The main idea is to organize a plane into various trapezoids , and then use a DAG structure to effeciently answer queries about point location. The leaf nodes represent the trapezoids, and decisions are taken based on X and Y coordinates of points, The search structure is dynamically updated in such a way new points added are able to be located correctly. 
 
 ## Technologies Used
 
