@@ -1,52 +1,87 @@
-Dhruv Sharma, ds7042@rit.edu
 
-# Trapezoidal Map and Planar Point Location Codebase README
+# Trapezoidal Map for Line Segment Intersection Queries
 
 ## Overview
-This codebase is designed to implement a trapezoidal map and planar point location algorithm, essential for computational geometry tasks such as map searching and spatial data structures.
 
-## File Descriptions
+This repository contains the implementation of a trapezoidal map algorithm for efficient line segment intersection queries. The algorithm constructs a search structure to manage and query line segments within a bounded region, supporting various geometric operations.
 
-### `trapezoidal_map_and_planar_point_location.py`
-- **Description**: Main driver script. Initializes the trapezoidal map, processes input, builds the map, displays the adjacency matrix, and queries points.
-- **Usage**: Run directly. Requires `input.txt` for setup and outputs `output.txt` with the adjacency matrix.
+## Technologies Used
 
-### `trapezoid.py`
-- **Description**: Contains `Trapezoid` class and related node classes.
-- **Usage**: Imported by the main script.
+- **Python**
+- **Matplotlib** (for visualization)
+- **Pandas** (for data manipulation)
 
-### `points_and_segments.py`
-- **Description**: Contains `Point` and `Segment` class definitions.
-- **Usage**: Imported by the main script.
+## Features
 
-### `input.txt`
-- **Description**: Input data file with a list of segments for the trapezoidal map.
-- **Usage**: Should be formatted with endpoint coordinates for segments.
+- **Line Segment Management**: Efficiently manage and query line segments within a bounded region.
+- **Efficient Point Location Queries**: Quickly locate the trapezoid containing a given query point.
+- **Visualization**: Visualize line segments and their intersections for debugging and analysis.
 
-### `output.txt`
-- **Description**: Output file with the adjacency matrix from the main script.
-- **Usage**: Automatically generated.
+## Algorithm Details
 
-## Running the Codebase
+### Overview
 
-Ensure all `.py` files and `input.txt` are in the same directory. Run:
+The main algorithm implemented in this repository involves the construction and management of a trapezoidal map for line segment intersection queries. The algorithm supports efficient point location queries within the segments using a search structure consisting of different types of nodes.
 
-```bash
-python trapezoidal_map_and_planar_point_location.py
-```
+### Implementation
 
-Follow prompts for point input.
+- **Node Classes**: The algorithm uses different node classes (`XNode`, `YNode`, `LeafNode`) to represent decision nodes based on x-coordinates, y-coordinates, and trapezoidal regions.
+- **Data Structures**: Four global dictionaries (`P`, `Q`, `S`, `T`) are used to build the adjacency matrix and manage relationships between nodes.
+- **Process Function**: Reads input data and segments, and visualizes them for debugging purposes.
+- **RIC (Randomized Incremental Construction)**: This function constructs the trapezoidal map by iteratively adding segments and updating the map.
+- **Query Function**: Locates the trapezoid that contains a given query point, using the search structure.
 
-## Dependencies
+### Classes and Functions
 
-The code may depend on libraries such as `collections` and `pandas`. Install with:
+#### Node Classes
 
-```bash
-pip install pandas
-```
+- **Node**: Base class for nodes in the graph.
+- **XNode**: Represents decision nodes based on x-coordinates.
+- **YNode**: Represents decision nodes based on y-coordinates or segments.
+- **LeafNode**: Represents trapezoidal regions in the map.
 
-## Notes
+#### Key Functions
 
-- Modify `input.txt` for different segments.
-- Python version compatibility is essential.
-- Output is logged to both the command line and `output.txt`.
+- `process(filename)`: Reads the input file and stores segment data.
+- `ric(segments, bounding_box, trapezoids)`: Implements the randomized incremental construction of the trapezoidal map.
+- `query(node, query_point, segment_of_interest=None)`: Finds the leaf node corresponding to the trapezoid containing the query point.
+- `find_intersected_trapezoids(segment, trapezoids)`: Identifies trapezoids intersected by a given segment.
+- `update(trapezoids_intersected, trapezoids, left_point, right_point, segment)`: Updates the trapezoidal map and search structure when adding new segments.
+- `create_adjacency_matrix_and_output(filename, trapezoids)`: Generates an adjacency matrix and outputs it to a file.
+
+## Use Cases
+
+- **Geographic Information Systems (GIS)**: Efficiently manage and query geographic data.
+- **Computer Graphics**: Handle geometric operations and visualizations in computer graphics applications.
+- **Robotics and Path Planning**: Plan and navigate paths in environments with obstacles.
+
+## Prerequisites
+
+- Python 3.x
+- Matplotlib
+- Pandas
+
+## How to Run
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/your-username/trapezoidal-map.git
+   cd trapezoidal-map
+   ```
+
+2. Install the required packages:
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+3. Prepare the input file with line segments:
+
+   - The input file should be named `input.txt` and contain the number of segments, bounding box coordinates, and segment coordinates.
+
+4. Run the main script:
+
+   ```sh
+   python main.py
+   ```
